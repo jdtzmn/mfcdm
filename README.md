@@ -6,7 +6,7 @@ MFCDM takes the data collected from the individuals' burials and compiles it int
 
 ## More Info
 
-The goal of this project is to take data entered manually by hand and data entered automatically by form submission, and to combine the data  through automated form submission so that the merged data forms a common schema for future data analysis.
+The goal of this project is to take data entered manually by hand and data entered automatically by form submission, and to combine the data  through automated form submission so that the merged data forms a common schema for future analysis.
 
 ## Getting Started
 
