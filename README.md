@@ -2,7 +2,7 @@
 
 MFCDM takes the data collected from the individuals' burials and compiles it into one monolithic database
 
-[Click here](metfern-link) to learn more about the MetFern Cemetery and how you can help.
+[Click here][metfern-link] to learn more about the MetFern Cemetery and how you can help.
 
 ## More Info
 
@@ -55,11 +55,11 @@ $ npm start
 
 ## Authors
 
-* **Jacob Daitzman** - *Initial work* - [jdtzmn](profile-link)
+* **Jacob Daitzman** - *Initial work* - [jdtzmn][profile-link]
 
 ## License
 
-This project is left unlicensed on purpose, which means [it is under exclusive copyright](license-info-link) at the moment.
+This project is left unlicensed on purpose, which means [it is under exclusive copyright][license-info-link] at the moment.
 
 [metfern-link]: http://metferncemetery.org
 [profile-link]: https://github.com/jdtzmn
