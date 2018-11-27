@@ -2,7 +2,11 @@
 
 MFCDM takes the data collected from the individuals' burials and compiles it into one monolithic database
 
-[Click here](metfern-link) to learn more about the MetFern Cemetery project and how you can help.
+[Click here](metfern-link) to learn more about the MetFern Cemetery and how you can help.
+
+## More Info
+
+The goal of this project is to take data entered manually by hand and data entered automatically by form submission, and to combine the data  through automated form submission so that the merged data forms a common schema for future data analysis.
 
 ## Getting Started
 
@@ -53,13 +57,10 @@ $ npm start
 
 * **Jacob Daitzman** - *Initial work* - [jdtzmn](profile-link)
 
-See also the list of [contributors](contributions-link) who participated in this project.
-
 ## License
 
 This project is left unlicensed on purpose, which means [it is under exclusive copyright](license-info-link) at the moment.
 
 [metfern-link]: http://metferncemetery.org
 [profile-link]: https://github.com/jdtzmn
-[contributions-link]: https://github.com/jdtzmn/mfcdm
 [license-info-link]: https://choosealicense.com/no-permission/
