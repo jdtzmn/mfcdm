@@ -1,0 +1,34 @@
+{
+  "scripts": {
+    "start": "node index.js",
+    "lint": "eslint --ext .js ."
+  },
+  "dependencies": {
+    "axios": "^0.18.0"
+  },
+  "name": "mfcdm",
+  "description": "MFCDM takes the data collected from the individuals' burials and compiles it into one monolithic database",
+  "version": "0.1.0",
+  "main": "index.js",
+  "devDependencies": {
+    "eslint": "^5.9.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jdtzmn/mfcdm.git"
+  },
+  "keywords": [
+    "MetFern"
+  ],
+  "license": "UNLICENSED",
+  "author": "jdtzmn <jdtzmn@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/jdtzmn/mfcdm/issues"
+  },
+  "homepage": "https://github.com/jdtzmn/mfcdm#readme"
+}
