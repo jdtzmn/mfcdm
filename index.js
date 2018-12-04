@@ -4,6 +4,7 @@ const fetchTableData = require('./fetchTableData')
 const { createFormSubmitter } = require('./formSubmission')
 const question = require('./substitutionHelpers')
 const { formId } = require('./form.config')
+const handleEdits = require('./handleEdits')
 
 const instance = axios.create({
   baseURL: `https://docs.google.com/forms/d/e/${formId}`
@@ -15,11 +16,15 @@ const main = async () => {
 
   // Make sure the form looks correct
   console.log(entries)
-  const response = await question('Does this look right? Should the form be submitted?', ['Yes', 'No'])
+  const response = await question('Does this look right? Should the form be submitted? If it needs edits, type `Edit`.', ['Yes', 'No', 'Edit'])
 
-  if (response === 'No') {
-    console.log('The form was not submitted.')
-    return
+  switch (response) {
+    case 'No':
+      console.log('The form was not submitted.')
+      return
+    case 'Edit':
+      await handleEdits()
+      return main() // run the program again with the updated values
   }
 
   console.log('Submitting the form...')

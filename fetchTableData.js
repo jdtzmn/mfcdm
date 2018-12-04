@@ -1,29 +1,70 @@
-const crypto = require('crypto')
 const fs = require('fs')
 const tableData = require('./getTableData')
 const substitute = require('./runSubstitutions')
-const { cache } = require('./form.config')
+const { cache, formId } = require('./form.config')
+const { sha1 } = require('./cacheHelpers')
+const question = require('./substitutionHelpers')
 
-const sha1 = (string) => {
-  if (typeof string === 'object') string = JSON.stringify(string)
-  const hash = crypto.createHash('sha1')
-  hash.update(string)
-  return hash.digest('hex')
+const convertTableToHashObject = () => {
+  let data = {}
+
+  for (let row of tableData) {
+    data[sha1(row)] = row
+  }
+
+  return data
+}
+
+const convertHashListToTableList = (hashes, hashObject) => hashes.map(hash => hashObject[hash])
+
+const compareTableAndCache = (contents) => {
+  let table = convertTableToHashObject() // clone the tableData
+  let cache = JSON.parse(contents) // parse the cacheData
+
+  const tableKeys = Object.keys(table)
+
+  const newTableKeys = tableKeys.filter((hash) => (!cache[hash]))
+  const newTableDataToBeMerged = convertHashListToTableList(newTableKeys, table)
+  return newTableDataToBeMerged
 }
 
 const fetchTableData = async (instance) => {
   let data
 
-  const cacheFile = `${cache}${sha1(tableData)}`
+  const cacheFile = `${cache}${sha1(formId)}`
   if (fs.existsSync(cacheFile)) {
-    const contents = fs.readFileSync(cacheFile)
-    data = JSON.parse(contents)
+    data = await handleExistingCacheFile(cacheFile, instance)
   } else {
-    data = await substitute(instance)
+    data = await substitute(instance, tableData)
     fs.writeFileSync(cacheFile, JSON.stringify(data, undefined, 2))
   }
 
   return data
+}
+
+const handleExistingCacheFile = async (cacheFile, instance) => {
+  const contents = fs.readFileSync(cacheFile)
+  const difference = compareTableAndCache(contents)
+  const cacheData = JSON.parse(contents)
+
+  if (difference.length > 0) {
+    console.log('Items to be merged or overwritten:')
+    console.log(difference)
+    const answer = await question('A cache file exists, should the table data be merged with the cache file or overwritten?', ['Overwritten', 'Merged'])
+
+    switch (answer) {
+      case 'Overwritten':
+        fs.unlinkSync(cacheFile) // delete the cache file
+        return fetchTableData() // run fetchTableData so that the data is saved (now that the cache file is deleted)
+      default:
+        const substituted = await substitute(instance, difference)
+        const combined = Object.assign(cacheData, substituted)
+        fs.writeFileSync(cacheFile, JSON.stringify(combined, undefined, 2))
+        return combined
+    }
+  } else {
+    return cacheData
+  }
 }
 
 module.exports = fetchTableData
