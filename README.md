@@ -21,8 +21,8 @@ Before installing, [download and install Node.js](https://nodejs.org/en/download
 1. Clone the repository
 
 ```bash
-$ git clone https://github.com/jdtzmn/jdtzmn.github.io
-$ cd jdtzmn.github.io
+$ git clone https://github.com/jdtzmn/mfcdm
+$ cd mfcdm
 ```
 
 2. Install dependencies
