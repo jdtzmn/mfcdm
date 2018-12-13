@@ -1,17 +1,17 @@
-const tableData = require('./getTableData')
 const { convertEntries } = require('./formSubmission')
 const getFormData = require('./getFormData')
 const substitutions = require('./substitutions')
+const { sha1 } = require('./cacheHelpers')
 
-const runSubstitutions = async (instance) => {
+const runSubstitutions = async (instance, tableData) => {
   const { entries } = await getFormData(instance)
   const list = Object.keys(convertEntries(entries))
 
-  const data = []
+  const data = {}
 
   for (const row of tableData) {
     const substituted = await substitute(row, list)
-    data.push(substituted)
+    data[sha1(row)] = substituted
   }
 
   return data
