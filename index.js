@@ -1,39 +1,16 @@
-const axios = require('axios')
+const { term } = require('./lib/terminal')
 
-const fetchTableData = require('./fetchTableData')
-const question = require('./substitutionHelpers')
-const { formId } = require('./form.config')
-const handleEdits = require('./handleEdits')
-const constructPromises = require('./constructPromises')
+// commands
+const submitCommand = require('./lib/commands/submit')
 
-const instance = axios.create({
-  baseURL: `https://docs.google.com/forms/d/e/${formId}`
-})
+term.clear()
 
-const main = async () => {
-  const entries = await fetchTableData(instance)
-
-  // Make sure the form looks correct
-  console.log(entries)
-  console.log(`There are ${Object.keys(entries).length} entries`)
-  const response = await question('Does this look right? Should the form be submitted? If it needs edits, type `Edit`.', ['Yes', 'No', 'Edit'])
-
-  switch (response) {
-    case 'No':
-      console.log('The form was not submitted.')
-      return
-    case 'Edit':
-      await handleEdits()
-      return main() // run the program again with the updated values
-    case 'Yes':
+term('What would you like to do?\n')
+const { promise } = term.singleColumnMenu(['Submit Form', 'Convert Data', 'Analyze Data'])
+promise.then((command) => {
+  switch (command.selectedText) {
+    case 'Submit Form':
+      submitCommand()
+      break
   }
-
-  console.log('Submitting the form...')
-  const formPromises = constructPromises(entries, instance)
-  const responses = await Promise.all(formPromises.promises)
-  formPromises.writeFile() // save the responses
-  console.log('Submitted!')
-  console.log(responses.filter((x) => x))
-}
-
-main()
+})

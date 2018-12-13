@@ -4,7 +4,8 @@
     "lint": "eslint --ext .js ."
   },
   "dependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.18.0",
+    "terminal-kit": "^1.26.8"
   },
   "name": "mfcdm",
   "description": "MFCDM takes the data collected from the individuals' burials and compiles it into one monolithic database",
