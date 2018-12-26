@@ -1,22 +1,48 @@
 {
-  "scripts": {
-    "start": "node index.js",
-    "lint": "eslint --ext .js ."
-  },
-  "dependencies": {
-    "axios": "^0.18.0"
-  },
   "name": "mfcdm",
   "description": "MFCDM takes the data collected from the individuals' burials and compiles it into one monolithic database",
   "version": "0.1.0",
-  "main": "index.js",
+  "main": "dist/mfcdm.min.js",
+  "scripts": {
+    "start": "node dist/mfcdm.js",
+    "dev": "webpack --config config/webpack.dev.js",
+    "build": "webpack --config config/webpack.prod.js",
+    "test": "jest --watch",
+    "ci": "jest",
+    "lint": "tslint -p ."
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "tslint --fix",
+      "git add",
+      "jest --findRelatedTests"
+    ]
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "terminal-kit": "^1.26.8",
+    "xlsx": "^0.14.1"
+  },
   "devDependencies": {
-    "eslint": "^5.9.0",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-node": "^8.0.0",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0"
+    "@types/jest": "^23.3.5",
+    "clean-webpack-plugin": "^0.1.19",
+    "husky": "^1.1.2",
+    "jest": "^23.6.0",
+    "lint-staged": "^7.3.0",
+    "ts-jest": "^23.10.4",
+    "ts-loader": "^5.2.1",
+    "tslint": "^5.11.0",
+    "tslint-config-standard": "^8.0.1",
+    "tslint-loader": "^3.5.4",
+    "typescript": "^3.1.3",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-merge": "^4.1.4"
   },
   "repository": {
     "type": "git",

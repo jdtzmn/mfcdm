@@ -182,7 +182,7 @@ $RECYCLE.BIN/
 form.config.js
 
 # Default cache directory
-cache
+/cache
 
 # Substitutions file
 substitutions.js
