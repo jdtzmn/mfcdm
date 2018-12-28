@@ -178,14 +178,8 @@ $RECYCLE.BIN/
 
 ### Custom ###
 
-# Config file
-form.config.js
+# Input files
+input/*
 
-# Default cache directory
-/cache
-
-# Substitutions file
-substitutions.js
-
-# Table data
-table.txt
+# Output files
+output/*

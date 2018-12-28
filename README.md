@@ -31,26 +31,32 @@ $ cd mfcdm
 $ npm install
 ```
 
-3. Create config file
-
-Follow the directions inside [`example.form.config.js`](./example.form.config.js)
-
-4. Create table.txt file
-
-Open the table.txt file and paste the data from an excel spreadsheet
-
-5. Create a substitutions.js file
-
-The substitutions file is a JavaScript file that directs the code as to how to substitute data as needed in order to submit the form. 
-
-It should follow the general outline of [`example.substitutions.js`](./example.substitutions.js)
-
-The helper method `askQuestion` can be imported from [`substititutionHelpers.js`](./substitutionHelpers.js) to ask questions of the user.
-
-6. Run MFCDM
+3. Create `input` folder
 
 ```bash
-$ npm start
+$ mkdir input
+```
+
+### Usage
+
+Create a `converter.js` file in the `input` folder
+
+```js
+const Mfcdm = require('../dist/mfcdm')
+const mfcdm = new Mfcdm()
+
+const converter = async (sheetName, sheetRow) => {
+  ...
+}
+
+mfcdm.middleware('Sheet1', converter)
+mfcdm.start() // starts the mfcdm cli
+```
+
+Run the file
+
+```bash
+node input/converter.js
 ```
 
 ## Authors

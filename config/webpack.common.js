@@ -4,6 +4,9 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 module.exports = {
   entry: path.resolve(__dirname, '../src/index.ts'),
   target: 'node',
+  node: {
+    __dirname: false
+  },
   module: {
     rules: [
       {
@@ -31,6 +34,9 @@ module.exports = {
   ],
   output: {
     filename: 'mfcdm.js',
-    path: path.resolve(__dirname, '../dist')
+    path: path.resolve(__dirname, '../dist'),
+    libraryTarget: 'umd',
+    libraryExport: 'default',
+    umdNamedDefine: true
   }
 }

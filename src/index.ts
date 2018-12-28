@@ -1,33 +1,32 @@
-import * as program from 'commander'
 import * as inquirer from 'inquirer'
 
 import handleCommand from './commands'
 
 /* ============================== */
-/* ========= CLI OPTIONS ======== */
+/* ========= MFCDM CLASS ======== */
 /* ============================== */
 
-program
-  .version('0.1.0')
-  .option('-c, --convert', 'Convert Data')
-  .option('-v, --verify', 'Verify Data')
-  .option('-a --analyze', 'Analyze Data')
-  .parse(process.argv)
+export type ConverterFunction = (sheetName: string, sheetRow: object) => Promise<any>
+export interface Converters {
+  [key: string]: ConverterFunction
+}
 
-// construct a list of possible options
-const flags: string[] = program.options
-  .map((option: program.Option) => option.long.slice(2))
+export default class Mfcdm {
+  private converters: Converters
 
-// filter the arguments
-const args = Object.keys(program)
-  .filter(key => flags.indexOf(key) >= 0)
+  public static prompt = inquirer.createPromptModule()
 
-// handle a single argument
-if (args.length === 1) {
-  const command = args[0]
-  handleCommand(command)
-} else {
-  askForInput()
+  constructor () {
+    this.converters = {}
+  }
+
+  middleware (sheetName: string, fn: ConverterFunction) {
+    this.converters[sheetName] = fn
+  }
+
+  start () {
+    askForInput(this.converters)
+  }
 }
 
 /* ============================== */
@@ -49,11 +48,11 @@ enum Choice {
   'Quit'
 }
 
-function askForInput () {
-  const questions: inquirer.Question[] = [{
+function askForInput (middleware: Converters) {
+  const questions: inquirer.Questions = [{
+    type: 'list',
     name: 'command',
     message: 'What would you like to do?',
-    type: 'list',
     choices: [
       'Convert Data',
       'Verify Data',
@@ -64,7 +63,7 @@ function askForInput () {
 
   inquirer.prompt(questions)
     .then((answers: inquirer.Answers) => {
-      const choice: Choice = answers['command']
+      const choice: Choice = answers.command
 
       const choices: Choices = {
         'Convert Data': 'convert',
@@ -74,6 +73,6 @@ function askForInput () {
       }
 
       const command = choices[choice]
-      handleCommand(command)
+      handleCommand(command, middleware)
     })
 }
