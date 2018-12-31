@@ -16,7 +16,8 @@ const askWhichSheets = async (sheetNames: string[]) => {
     type: 'checkbox',
     name: 'sheets',
     message: 'There are multiple sheets availabe. Which ones should be converted?',
-    choices: sheetNames
+    choices: sheetNames,
+    default: sheetNames
   }]
 
   return inquirer.prompt(questions)
@@ -45,8 +46,14 @@ const convert = async (middleware: Converters) => {
   })
   const sheetNames = workbook.SheetNames
 
-  // ask for which sheets should be converted
   let sheetsToConvert = sheetNames
+
+  // filter out available middleware
+  const sheetConverters = Object.keys(middleware)
+  sheetsToConvert = sheetsToConvert
+    .filter(name => sheetConverters.indexOf(name) > -1)
+
+  /* ====== ASK WHICH SHEETS ===== */
   if (sheetsToConvert.length > 1) {
     sheetsToConvert = await askWhichSheets(sheetNames)
   }
