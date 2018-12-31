@@ -55,7 +55,7 @@ const convert = async (middleware: Converters) => {
 
   for (let sheetName of sheetsToConvert) {
     const sheet = workbook.Sheets[sheetName]
-    const sheetData = xlsx.utils.sheet_to_json(sheet).slice(0, 10)
+    const sheetData = xlsx.utils.sheet_to_json(sheet)
     const convertedSheetData = await convertSheet(sheetName, sheetData, middleware[sheetName])
     const worksheet = xlsx.utils.json_to_sheet(convertedSheetData)
     xlsx.utils.book_append_sheet(outputWorkbook, worksheet, sheetName)
