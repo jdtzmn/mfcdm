@@ -1,16 +1,17 @@
 import convert from './convert'
-import { Converters } from '..'
+import analyze from './analyze'
+import Mfcdm from '..'
 
-export default (command: string, middleware: Converters) => {
+export default (command: string, mfcdm: Mfcdm) => {
   switch (command) {
     case 'convert':
-      convert(middleware)
+      convert(mfcdm)
       break
     case 'verify':
-      console.log('yay')
+      console.log('verify command is still in progress')
       break
     case 'analyze':
-      console.log('yay2')
+      analyze(mfcdm)
       break
     default:
       process.exit(0)

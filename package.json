@@ -4,8 +4,7 @@
   "version": "0.1.0",
   "main": "dist/mfcdm.min.js",
   "scripts": {
-    "start": "node dist/mfcdm.js",
-    "dev": "webpack --config config/webpack.dev.js",
+    "start": "webpack --config config/webpack.dev.js",
     "build": "webpack --config config/webpack.prod.js",
     "test": "jest --watch",
     "ci": "jest",
@@ -25,16 +24,18 @@
     ]
   },
   "dependencies": {
-    "@types/inquirer": "^0.0.43",
     "axios": "^0.18.0",
+    "chart.js": "^2.7.3",
+    "chartjs-node-canvas": "https://github.com/jdtzmn/ChartjsNodeCanvas",
+    "chartjs-plugin-datalabels": "^0.5.0",
     "inquirer": "^6.2.1",
     "inquirer-directory": "^2.1.0",
     "inquirer-file-path": "^1.0.1",
-    "terminal-kit": "^1.26.8",
     "xlsx": "^0.14.1"
   },
   "devDependencies": {
     "@types/commander": "^2.12.2",
+    "@types/inquirer": "^0.0.43",
     "@types/jest": "^23.3.5",
     "@types/node": "^10.12.18",
     "clean-webpack-plugin": "^0.1.19",
@@ -43,12 +44,13 @@
     "lint-staged": "^7.3.0",
     "moment": "^2.23.0",
     "nexe": "^2.0.0-rc.34",
+    "node-loader": "^0.6.0",
     "ts-jest": "^23.10.4",
     "ts-loader": "^5.2.1",
     "tslint": "^5.11.0",
     "tslint-config-standard": "^8.0.1",
     "tslint-loader": "^3.5.4",
-    "typescript": "^3.1.3",
+    "typescript": "^3.2.4",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2",
     "webpack-merge": "^4.1.4"

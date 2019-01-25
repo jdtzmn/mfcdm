@@ -5,7 +5,7 @@ import { defaultTablePath, convertedExcelName } from '../../config'
 
 import { locateFile, locateDir } from '../helpers'
 import convertSheet from './convertSheet'
-import { Converters } from '..'
+import Mfcdm from '..'
 
 /* ============================== */
 /* ======== HELPER METHODS ====== */
@@ -35,7 +35,8 @@ const exportWorkbook = async (workbook: xlsx.WorkBook) => {
 /* ======= CONVERT COMMAND ====== */
 /* ============================== */
 
-const convert = async (middleware: Converters) => {
+const convert = async (mfcdm: Mfcdm) => {
+  const middleware = mfcdm.converters
   /* ======= GET TABLE PATH ======= */
 
   const tablePath = await locateFile(defaultTablePath)
