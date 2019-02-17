@@ -5,7 +5,11 @@ export default async (sheetName: string, sheetData: {}[], converter: ConverterFu
 
   for (let sheetRow of sheetData) {
     const convertedRow = await converter(sheetName, sheetRow)
-    convertedData.push(convertedRow)
+
+    // Only push the converted row if the response is not false
+    if (convertedRow !== false) {
+      convertedData.push(convertedRow)
+    }
   }
 
   return convertedData

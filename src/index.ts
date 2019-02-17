@@ -14,7 +14,7 @@ export interface ChartConfiguration {
   }
 }
 
-export type ConverterFunction = (sheetName: string, sheetRow: object) => Promise<ChartConfiguration[]>
+export type ConverterFunction = (sheetName: string, sheetRow: object) => Promise<ChartConfiguration[] | false>
 export interface Converters {
   [key: string]: ConverterFunction
 }
