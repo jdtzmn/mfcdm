@@ -1,6 +1,6 @@
 # MetFern Cemetery Data Manipulation (MFCDM)
 
-MFCDM takes the data collected from the individuals' burials and compiles it into one monolithic database
+MFCDM takes the data collected from the individuals' burials and compiles it into one monolithic database as well as running analytics on that data
 
 [Click here][metfern-link] to learn more about the MetFern Cemetery and how you can help.
 
@@ -39,7 +39,9 @@ $ mkdir input
 
 ### Usage
 
-Create a `converter.js` file in the `input` folder
+#### Converters
+
+Create a `converter.js` file in the `input` folder (any name will work)
 
 ```js
 const Mfcdm = require('../dist/mfcdm')
@@ -49,14 +51,18 @@ const converter = async (sheetName, sheetRow) => {
   ...
 }
 
-mfcdm.middleware('Sheet1', converter)
+mfcdm.setConverter('Sheet1', converter)
 mfcdm.start() // starts the mfcdm cli
 ```
 
-Run the file
+#### Analyzers
+
+Create a `analyzer.js` file in the `input` folder (any name will work)
+
+Run the code (a menu will ask whether to analyze or convert)
 
 ```bash
-node input/converter.js
+node dist/mfcdm.js
 ```
 
 ## Authors
