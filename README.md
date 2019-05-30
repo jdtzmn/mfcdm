@@ -69,6 +69,10 @@ node dist/mfcdm.js
 
 * **Jacob Daitzman** - *Initial work* - [jdtzmn][profile-link]
 
+## Changelog
+
+To view the changelog, [click here](CHANGELOG.md).
+
 ## License
 
 This project is left unlicensed on purpose, which means [it is under exclusive copyright][license-info-link] at the moment.
