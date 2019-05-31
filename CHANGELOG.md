@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Code examples to the README.md
+- Output statistics to excel sheet (as an alternative to the graphs)
+
+### Fixed
+
+- Missing specifications in README.md
+
+### Removed
+
+- Removed graph output
+
 ## [1.0.0] - 2019-05-30
 
 ### Added

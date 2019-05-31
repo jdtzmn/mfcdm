@@ -1,11 +1,10 @@
-import * as path from 'path'
 import * as inquirer from 'inquirer'
 import * as xlsx from 'xlsx'
-import { default as Mfcdm, ChartConfiguration } from '..'
-import { convertedTablePath } from '../../config'
+import Mfcdm from '..'
+import { convertedTablePath, statisticsExcelName } from '../../config'
+import { default as exportData, ExportData } from './exportData'
 
-import { locateFile, locateDir } from '../helpers'
-import exportGraph from './exportGraph'
+import { locateFile } from '../helpers'
 
 /* ============================== */
 /* ======== HELPER METHODS ====== */
@@ -21,24 +20,6 @@ const askWhichSheet = async (sheetNames: string[]) => {
 
   return inquirer.prompt(questions)
     .then((answers: inquirer.Answers) => answers.sheet)
-}
-
-interface ExportData {
-  [key: string]: ChartConfiguration
-}
-
-const exportGraphs = async (configurations: ExportData) => {
-  /* ===== SPECIFY EXPORT DIR ===== */
-  const directory = await locateDir(`Where should the graph files be put?`)
-  const absolutePath = path.resolve(directory)
-
-  /* ======== EXPORT GRAPHS ======= */
-  for (let name in configurations) {
-    const config = configurations[name]
-
-    const fullPath = path.join(absolutePath, `${name}.png`)
-    await exportGraph(config, fullPath)
-  }
 }
 
 /* ============================== */
@@ -68,16 +49,16 @@ const analyze = async (mfcdm: Mfcdm) => {
   const sheetData = xlsx.utils.sheet_to_json(sheet)
 
   /* ======= ANALYZE DATA ======= */
-  let configurations: ExportData = {}
+  let outputData: ExportData = {}
 
   for (let analyzerName in middleware) {
     const analyzer = middleware[analyzerName]
-    const configuration = await analyzer(analyzerName, sheetData)
-    configurations[analyzerName] = configuration
+    const statistics = await analyzer(analyzerName, sheetData)
+    outputData[analyzerName] = statistics
   }
 
   /* ======== EXPORT DATA ======= */
-  exportGraphs(configurations)
+  await exportData(outputData, statisticsExcelName)
 }
 
 export default analyze
