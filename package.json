@@ -1,7 +1,7 @@
 {
   "name": "mfcdm",
   "description": "MFCDM takes the data collected from the individuals' burials and compiles it into one monolithic database",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "main": "dist/mfcdm.min.js",
   "scripts": {
     "start": "webpack --config config/webpack.dev.js",
