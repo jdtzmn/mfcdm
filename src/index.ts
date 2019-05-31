@@ -7,14 +7,7 @@ import handleCommand from './commands'
 /* ========= MFCDM CLASS ======== */
 /* ============================== */
 
-export interface ChartConfiguration {
-  type: string,
-  data: {
-    [key: string]: any
-  }
-}
-
-export type ConverterFunction = (sheetName: string, sheetRow: object) => Promise<ChartConfiguration[] | false>
+export type ConverterFunction = (sheetName: string, sheetRow: object) => Promise<{} | false>
 export interface Converters {
   [key: string]: ConverterFunction
 }

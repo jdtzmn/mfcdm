@@ -48,10 +48,10 @@ const Mfcdm = require('../dist/mfcdm')
 const mfcdm = new Mfcdm()
 
 const converter = async (sheetName, sheetRow) => {
-  ...
+  /* code here */
 }
 
-mfcdm.setConverter('Sheet1', converter)
+mfcdm.setConverter('converter name', converter)
 mfcdm.start() // starts the mfcdm cli
 ```
 
@@ -59,10 +59,28 @@ mfcdm.start() // starts the mfcdm cli
 
 Create a `analyzer.js` file in the `input` folder (any name will work)
 
+```js
+const Mfcdm = require('../dist/mfcdm')
+const mfcdm = new Mfcdm()
+
+const analyzer = async (name, sheet) => {
+  /* code here */
+
+  return {
+    'Statistic Label': 'value'
+  }
+}
+
+mfcdm.setAnalyzer('analyzer name', analyzer)
+mfcdm.start() // starts the mfcdm cli
+```
+
 Run the code (a menu will ask whether to analyze or convert)
 
 ```bash
-node dist/mfcdm.js
+node input/converter.js
+# or
+node input/analyzer.js
 ```
 
 ## Authors
