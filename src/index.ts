@@ -2,6 +2,7 @@ import * as inquirer from 'inquirer'
 import { WorkSheet } from 'xlsx'
 
 import handleCommand from './commands'
+import { pickSheetData } from './helpers'
 
 /* ============================== */
 /* ========= MFCDM CLASS ======== */
@@ -23,6 +24,7 @@ export default class Mfcdm {
   analyzers: Analyzers
 
   public static prompt = inquirer.createPromptModule()
+  public static fetchSpreadsheet = pickSheetData
 
   constructor () {
     this.converters = {}
