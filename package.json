@@ -19,7 +19,6 @@
   "lint-staged": {
     "*.ts": [
       "tslint --fix",
-      "git add",
       "jest --findRelatedTests"
     ]
   },
@@ -38,7 +37,7 @@
     "clean-webpack-plugin": "^0.1.19",
     "husky": "^1.1.2",
     "jest": "^23.6.0",
-    "lint-staged": "^7.3.0",
+    "lint-staged": "^10.2.2",
     "moment": "^2.23.0",
     "nexe": "^2.0.0-rc.34",
     "node-loader": "^0.6.0",

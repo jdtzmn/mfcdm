@@ -38,7 +38,7 @@ export default class Mfcdm {
   }
 
   start () {
-    askForInput(this)
+    return askForInput(this)
   }
 }
 
@@ -74,7 +74,7 @@ function askForInput (mfcdm: Mfcdm) {
     ]
   }]
 
-  inquirer.prompt(questions)
+  return inquirer.prompt(questions)
     .then((answers: inquirer.Answers) => {
       const choice: Choice = answers.command
 

@@ -5,14 +5,12 @@ import Mfcdm from '..'
 export default (command: string, mfcdm: Mfcdm) => {
   switch (command) {
     case 'convert':
-      convert(mfcdm)
-      break
+      return convert(mfcdm)
     case 'verify':
       console.log('verify command is still in progress')
       break
     case 'analyze':
-      analyze(mfcdm)
-      break
+      return analyze(mfcdm)
     default:
       process.exit(0)
   }

@@ -11,7 +11,7 @@ const exportData = async (outputData: ExportData, fileName: string) => {
 
   for (let analyzerName in outputData) {
     const analyzerData = outputData[analyzerName]
-    const worksheet = xlsx.utils.json_to_sheet([outputData[analyzerName]])
+    const worksheet = xlsx.utils.json_to_sheet([analyzerData])
     xlsx.utils.book_append_sheet(outputWorkbook, worksheet, analyzerName)
   }
 
