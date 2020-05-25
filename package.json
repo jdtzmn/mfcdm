@@ -23,7 +23,7 @@
     ]
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "inquirer": "^6.2.1",
     "inquirer-directory": "^2.1.0",
     "inquirer-file-path": "^1.0.1",
