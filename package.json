@@ -27,7 +27,7 @@
     "inquirer": "^6.2.1",
     "inquirer-directory": "^2.1.0",
     "inquirer-file-path": "^1.0.1",
-    "xlsx": "^0.14.1"
+    "xlsx": "^0.17.0"
   },
   "devDependencies": {
     "@types/commander": "^2.12.2",
